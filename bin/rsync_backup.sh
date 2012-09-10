@@ -2,7 +2,7 @@
 
 # We read host list and strip "opinsys.fi" off from each hostname
 logger "RSYNC BACKUP: Started."
-sed 's/.opinsys.fi//' /root/bin/hostit.txt | while read hostorg; do 
+sed 's/.opinsys.fi//' /root/backup2012/hostit.txt | while read hostorg; do 
 
    # hostorg = ltspN.kunta
    # we split contents of hostorg into two variables (host, organization)
