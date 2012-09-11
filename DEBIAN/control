@@ -1,0 +1,8 @@
+Package: opinsys-backup2012
+Version: 0.1
+Priority: optional
+Section: base
+Depends: cron,bash,rsync,wget
+Maintainer: Markus Vuori <mvuori@opinsys.fi>
+Architecture: all
+Description: Opinsys customer server backup system.
