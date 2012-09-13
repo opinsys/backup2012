@@ -1,5 +1,7 @@
 #!/bin/bash
 
+. /root/.keychain/$HOSTNAME-sh
+
 # We read host list and strip "opinsys.fi" off from each hostname
 logger "RSYNC BACKUP: Started."
 sed 's/.opinsys.fi//' /etc/opinsys/customers_ltsp_servers.txt | while read hostorg; do 
@@ -14,13 +16,16 @@ sed 's/.opinsys.fi//' /etc/opinsys/customers_ltsp_servers.txt | while read hosto
        mkdir -p /backup/$organisaatio/$host
    fi
 
+   # Sleeping a bit to make the start a little bit lighter for our cpu
+   sleep 5
+
    # Start rsync process and continue
    /usr/local/bin/rsync.sh $organisaatio $host &
 
-   # Sleep (and don't start more rsyncs) if there are already enought rsyncs running
-   number_of_rsyncs=$(ps axuc | grep rsync | grep -v rsync.sh | wc -l)
-   while (( number_of_rsyncs > 30 )); do
-       sleep 30
+   # Sleep (and don't start more rsyncs) if there are already enough rsync processes running
+   number_of_rsyncs=$(ps axuc | grep rsync | grep -v rsync.*sh | wc -l)
+   while (( number_of_rsyncs > 40 )); do
+       sleep 20
        number_of_rsyncs=$(ps axuc | grep rsync | grep -v rsync.sh | wc -l)
    done
 done
