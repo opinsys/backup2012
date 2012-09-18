@@ -1,5 +1,5 @@
 # RSYNC BACKUP
  
- 0  8 * * 1-5     root   pkill -f rsync && sleep 20 && pkill -9 -f rsync
+ 0  8 * * 1-5     root   /usr/local/bin/end_backup.sh
 10 16 * * 1-5     root   /usr/local/bin/rsync_backup.sh
- 0  7 * * *       root   wget -O /etc/opinsys/customers_ltsp_servers.txt http://puavo/api/get_customers_ltsp_servers
+#  0  7 * * *       root   wget -O /etc/opinsys/customers_ltsp_servers.txt http://puavo/api/get_customers_ltsp_servers
