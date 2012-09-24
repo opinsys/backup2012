@@ -4,7 +4,7 @@ ps xw | grep /usr/local/bin/rsync.sh | grep -v grep | sed 's/.*rsync.sh //' | aw
 
 pkill -f rsync && sleep 3 && pkill -f rsync
 
-/usr/local/bin/report.pl | mail -s "Daily backup report" 'mvuori@opinsys.fi'
+/usr/local/bin/report.pl | mail -s "Daily backup report" 'tuki@opinsys.fi'
 
 
 
