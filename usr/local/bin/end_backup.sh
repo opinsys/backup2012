@@ -5,7 +5,7 @@ ps xw | grep /usr/local/bin/rsync.sh | grep -v grep | sed 's/.*rsync.sh //' | aw
 
 sort /var/run/daily_backup_report | mail -s "Daily backup report" 'tuki@opinsys.fi'
 
-pkill -f rsync && sleep 3 && pkill -f rsync
+pkill -f -USR1 rsync && sleep 5 && pkill -9 -f rsync
 
 
 
