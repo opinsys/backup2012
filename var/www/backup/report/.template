@@ -1,0 +1,36 @@
+<html>
+<head>
+<title>Backup report for DATE</title>
+<link rel="stylesheet" type="text/css" href=".template.css" />
+<link rel="stylesheet" type="text/css" href="/javascript/jquery-fancybox/jquery.fancybox.css" />
+<script src="/javascript/jquery/jquery.min.js"></script>
+<script src="/javascript/jquery-fancybox/jquery.fancybox.min.js"></script>
+</head>
+<body>
+<script>
+   $(document).ready(function() {
+   $("a.graph").fancybox();
+   })
+</script>
+<h1>Backup report for DATE</title>
+<h2>Errors</h2>
+<div id="errors">
+<ul id="errors">
+ERRORLIST
+</ul>
+</div>
+<h2>Graphs</h2>
+<div id="graphs">
+<ul id="graphs">
+GRAPHLIST
+</ul>
+</div>
+<h2>Raw report</h2>
+<div id="report">
+<pre>
+REPORT
+</pre>
+</div>
+</body>
+</html>
+

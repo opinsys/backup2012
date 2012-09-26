@@ -1,0 +1,36 @@
+.thumb {
+    width: 300px;
+}
+
+ul {
+   list-style-type: none;
+
+}
+
+ul#graphs li {
+   float: left;
+}
+
+img.thumb {
+   margin-right: 30px;
+}
+
+h1 {
+   font-family: comic;
+   color: #372;
+}
+
+h2 {
+   font-family: arial;
+   color: #532;
+   clear: both;
+}
+div {
+   clear: both;
+}
+
+pre {
+   margin-left: 3em;
+   font-family: monospace;
+}
+
