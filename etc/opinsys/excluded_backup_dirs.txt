@@ -1,3 +1,5 @@
 opinsys
 siirto
 .gvfs
+.pulse
+gvfs-metadata
