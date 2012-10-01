@@ -10,6 +10,8 @@ my @data = `cat /var/run/daily_backup_report`;
 @data = sort @data;
 # How many slices we want (besides "OTHER")
 my $SLICES = 25;
+# HTTP server IP address
+my $HTTP_SERVER_IP_ADDR=shift;
 # WWW server base dir
 my $WWWDIR = '/var/www';
 # reports base dir
@@ -135,4 +137,4 @@ my $report_url = "$BASEDIR/report_${date}.html";
 open(REPORT,">$WWWDIR/$report_url");
 print REPORT $report_template;
 close REPORT;
-print "http://10.246.133.5/$report_url";
+print "http://${HTTP_SERVER_IP_ADDR}/$report_url";
