@@ -4,7 +4,7 @@ organization=$1
 host=$2
 logger "Rsyncing target ${host}.${organization} ..."
 echo "$host.$organization 0 started `date --rfc-3339=seconds`" >> /var/run/daily_backup_report
-rsync --stats -hzax --exclude-from "/etc/opinsys/excluded_backup_dirs.txt" root@${host}.${organization}.opinsys.fi:/home /backup/$organization/$host | sed 's/^/;/' | grep Total | xargs | sed "s/^/${host}.${organization} 1 /" >> /var/run/daily_backup_report
+rsync --stats -HShzax --exclude-from "/etc/opinsys/excluded_backup_dirs.txt" root@${host}.${organization}.opinsys.fi:/home /backup/$organization/$host | sed 's/^/;/' | grep Total | xargs | sed "s/^/${host}.${organization} 1 /" >> /var/run/daily_backup_report
 returncode=${PIPESTATUS[0]}
 echo "$host.$organization 2 ended `date --rfc-3339=seconds`" >> /var/run/daily_backup_report
 
