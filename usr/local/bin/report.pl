@@ -107,12 +107,17 @@ push @transferred_datas, ( $total_transferred - $transferred_first_slices );
 push @hosts_according_to_transferred, "OTHER";
 
 
+my $total_transferred_human = sprintf( "%.1f", $total_transferred / (1024*1024*1024) );
+my $total_data_human = sprintf( "%.1f", $total_data / (1024*1024*1024) );
+
+my $totals  = "<li>Total customer data: ${total_data_human} GB</li>\n";
+$totals .= "<li>Total transferred data: ${total_transferred_human} GB</li>\n";
 # We draw a couple of pie charts and output them as PNG images.
 my $graph = GD::Graph::pie->new(800,800);
 my @gdata = ( \@hosts_according_to_total, \@total_datas );
 my $gd = $graph->plot(\@gdata);
 my $filename = "$IMAGEDIR/total_${date}.png";
-push @images, "<li><a title='Total Data' class='graph' href='/$filename'><img class='thumb' src='/$filename' alt='Total data'></a></li>";
+push @images, "<li><a title='Total Data ${total_data_human} GB' class='graph' href='/$filename'><img class='thumb' src='/$filename' alt='Total data'></a></li>";
 open(IMG, ">$WWWDIR/$filename") or die$!;
 binmode IMG;
 print IMG $gd->png;
@@ -122,7 +127,7 @@ my $graph2 = GD::Graph::pie->new(800,800);
 my @gdata2 = ( \@hosts_according_to_transferred, \@transferred_datas );
 my $gd2 = $graph2->plot(\@gdata2);
 $filename = "$IMAGEDIR/transferred_${date}.png";
-push @images, "<li><a title='Transferred data' class='graph' href='/$filename'><img class='thumb' src='/$filename' alt='Transferred data'></a></li>";
+push @images, "<li><a title='Transferred data ${total_transferred_human} GB' class='graph' href='/$filename'><img class='thumb' src='/$filename' alt='Transferred data'></a></li>";
 open(IMG, ">$WWWDIR/$filename") or die$!;
 binmode IMG;
 print IMG $gd2->png;
@@ -132,6 +137,7 @@ close IMG;
 # We populate the tempplate and print it out
 $report_template =~ s/GRAPHLIST/join("\n", @images)/e;
 $report_template =~ s/REPORT/join("", @data)/e;
+$report_template =~ s/TOTALS/$totals/e;
 $filename = "$IMAGEDIR/transferred_${date}.png";
 my $report_url = "$BASEDIR/report_${date}.html";
 open(REPORT,">$WWWDIR/$report_url");
