@@ -22,7 +22,7 @@ backup () {
    /usr/local/bin/rsync.sh $organisaatio $host &
 
    # Sleeping a bit to make the start a little bit lighter for our cpu
-   sleep 15
+   sleep 40
 
    # Sleep (and don't start more rsyncs) if there are already enough rsync processes running
    number_of_rsyncs=$(ps axuc | grep rsync | grep -v rsync.*sh | wc -l)
