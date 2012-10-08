@@ -89,6 +89,7 @@ $report_template =~ s/DATE/$date/ge;
 
 # We want to sort hostnames (and total data amounts): "ORDER BY total data DESCENDING"
 # For that we create a helper array containing numbers in the right order and use that array for sorting.
+$SLICES = $#total_datas if $SLICES > $#total_datas;
 my @permutation = sort { $total_datas[$b] <=> $total_datas[$a] } (0..$#total_datas);
 my @hosts_according_to_total = (@hosts_total[@permutation])[0..$SLICES];
 @total_datas = (@total_datas[@permutation])[0..$SLICES];
