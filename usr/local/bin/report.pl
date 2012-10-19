@@ -2,7 +2,6 @@
 
 # This script formats html report and creates pie graphs
 use strict;
-use Data::Dumper;
 use GD::Graph::pie;
 
 my @data = `cat /var/run/daily_backup_report`;
@@ -96,7 +95,7 @@ my @hosts_according_to_total = (@hosts_total[@permutation])[0..$SLICES];
 # We calculate the total data of first slices...
 foreach (@total_datas) { $total_first_slices += $_ };
 # So that we can push the remaining data for the "OTHER" slice
-push @total_datas, ( $total_data - $total_first_slices );
+push @total_datas, ( $total_data - $total_first_slices + 1 );
 push @hosts_according_to_total, "OTHER";
 
 # Again we want to sort hostnames (and transferred data amounts): "ORDER BY transferred data DESCENDING"
@@ -104,7 +103,7 @@ push @hosts_according_to_total, "OTHER";
 my @hosts_according_to_transferred = (@hosts_transferred[@permutation])[0..$SLICES];
 @transferred_datas = (@transferred_datas[@permutation])[0..$SLICES];
 foreach (@transferred_datas) { $transferred_first_slices += $_ };
-push @transferred_datas, ( $total_transferred - $transferred_first_slices );
+push @transferred_datas, ( $total_transferred - $transferred_first_slices + 1);
 push @hosts_according_to_transferred, "OTHER";
 
 
